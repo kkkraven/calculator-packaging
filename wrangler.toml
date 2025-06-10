@@ -1,5 +1,4 @@
 name = "calculator-packaging"
-main = "_worker.js"
 compatibility_date = "2024-01-01"
 
 [vars]
@@ -20,4 +19,3 @@ pages_build_output_dir = "dist"
 
 [build]
 command = "npm run build"
-upload.format = "service-worker"
