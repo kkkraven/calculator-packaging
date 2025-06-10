@@ -3,21 +3,20 @@ main = "_worker.js"
 compatibility_date = "2024-01-01"
 
 [vars]
-GOOGLE_API_KEY = "AIzaSyAozhGc9aqcIDx99TSOG7c7bCqqyavbJCg"
+GOOGLE_API_KEY = "AIzaSyBQYwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQ"
 
 [[kv_namespaces]]
 binding = "LOGS"
-id = "16577da614314e11a181583abff72a9b"
-preview_id = "0b5c1c876b514d7a8e23f03b22e11831"
+id = "LOGS"
+preview_id = "LOGS"
 
 [[kv_namespaces]]
 binding = "ORDERS_KB"
-id = "c68efb3304144eb386dfd4314931f366"
-preview_id = "c68efb3304144eb386dfd4314931f366"
+id = "ORDERS_KB"
+preview_id = "ORDERS_KB"
 
-[pages]
-name = "calculator-packaging"
-pages_build_output_dir = "dist"
+[site]
+bucket = "dist"
 
 [build]
 command = "npm run build"
