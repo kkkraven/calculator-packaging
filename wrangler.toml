@@ -1,4 +1,4 @@
-name = "calculator-api"
+name = "calculator-packaging"
 main = "_worker.js"
 compatibility_date = "2024-01-01"
 
@@ -15,9 +15,9 @@ binding = "ORDERS_KB"
 id = "c68efb3304144eb386dfd4314931f366"
 preview_id = "c68efb3304144eb386dfd4314931f366"
 
-[site]
-bucket = "./dist"
-entry-point = "."
+[pages]
+name = "calculator-packaging"
+pages_build_output_dir = "dist"
 
 [build]
 command = "npm run build"
