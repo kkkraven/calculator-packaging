@@ -3,7 +3,7 @@ main = "_worker.js"
 compatibility_date = "2024-01-01"
 
 [vars]
-GOOGLE_API_KEY = "AIzaSyBQYwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQ"
+GOOGLE_API_KEY = "AIzaSyAozhGc9aqcIDx99TSOG7c7bCqqyavbJCg"
 
 [[kv_namespaces]]
 binding = "LOGS"
