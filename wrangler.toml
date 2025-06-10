@@ -15,8 +15,8 @@ binding = "ORDERS_KB"
 id = "ORDERS_KB"
 preview_id = "ORDERS_KB"
 
-[site]
-bucket = "dist"
+[pages]
+pages_build_output_dir = "dist"
 
 [build]
 command = "npm run build"
