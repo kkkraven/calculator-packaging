@@ -15,6 +15,10 @@ binding = "ORDERS_KB"
 id = "c68efb3304144eb386dfd4314931f366"
 preview_id = "c68efb3304144eb386dfd4314931f366"
 
-[pages]
-name = "calculator-obfuscated"
-pages_build_output_dir = "dist"
+[site]
+bucket = "./dist"
+entry-point = "."
+
+[build]
+command = "npm run build"
+upload.format = "service-worker"
