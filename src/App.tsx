@@ -4,6 +4,7 @@ import './index.css'; // Импортируем базовые стили Tailwi
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion } from 'framer-motion';
+import CalculatorIcon from './components/CalculatorIcon';
 
 // Удаляем импорт иконки, так как теперь она будет встроена как SVG
 // import calculatorIcon from './assets/calculator-icon.png'; 
@@ -59,9 +60,7 @@ function App() {
       <header className="text-center mb-8">
         <div className="flex items-center justify-center mb-2">
           {/* Заменяем img на inline SVG */}
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mr-3 text-[#6EE7B7]">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5m-3.935 6.525A2.25 2.25 0 0 1 12 12.75a2.25 2.25 0 0 1 2.25-2.25h.375c.621 0 1.125.504 1.125 1.125V15a2.25 2.25 0 0 1-2.25 2.25H12a2.25 2.25 0 0 1-2.25-2.25V6.75m-.429 10.66c.21.058.423.1.636.1H12.75A2.25 2.25 0 0 0 15 15.75V6.75a2.25 2.25 0 0 0-2.25-2.25H9.75A2.25 2.25 0 0 0 7.5 6.75V15c0 1.036.784 1.875 1.815 1.905m-2.791-.013c-.457-.117-.914-.239-1.365-.363L4.352 15M3 15.75c0 1.35.617 2.559 1.59 3.39L8.25 21l-1.423-1.423a2.25 2.25 0 0 0-2.052-3.551z" />
-          </svg>
+          <CalculatorIcon className="w-10 h-10 mr-3 text-[#6EE7B7]" />
           <h1 className="text-4xl font-bold text-[#6EE7B7]">Чат-Калькулятор <span className="text-[#6EE7B7]">Упаковки</span></h1>
         </div>
         <p className="text-gray-400 text-lg text-center">Опишите ваш заказ, и я рассчитаю примерную стоимость</p>
@@ -72,9 +71,7 @@ function App() {
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 p-4">
             {/* Заменяем img на inline SVG */}
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mb-6 w-28 h-28 opacity-40 text-[#6EE7B7]">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5M9 12.75V15m6-6v8.25m.5 1.5H9.75a1.5 1.5 0 0 1-1.5-1.5V15m12-2.25V4.5m-3.935 6.525A2.25 2.25 0 0 1 12 12.75a2.25 2.25 0 0 1 2.25-2.25h.375c.621 0 1.125.504 1.125 1.125V15a2.25 2.25 0 0 1-2.25 2.25H12a2.25 2.25 0 0 1-2.25-2.25V6.75m-.429 10.66c.21.058.423.1.636.1H12.75A2.25 2.25 0 0 0 15 15.75V6.75a2.25 2.25 0 0 0-2.25-2.25H9.75A2.25 2.25 0 0 0 7.5 6.75V15c0 1.036.784 1.875 1.815 1.905m-2.791-.013c-.457-.117-.914-.239-1.365-.363L4.352 15M3 15.75c0 1.35.617 2.559 1.59 3.39L8.25 21l-1.423-1.423a2.25 2.25 0 0 0-2.052-3.551z" />
-            </svg>
+            <CalculatorIcon className="mb-6 w-28 h-28 opacity-40 text-[#6EE7B7]" />
             <p className="text-2xl font-semibold mb-4">Начните описание вашего заказа упаковки</p>
             <p className="text-lg max-w-md">Например: &quot;Нужны коробки самосборные 200x150x100мм, мелованная бумага 350г/м², 1000 штук, печать 4+0&quot;</p>
           </div>
