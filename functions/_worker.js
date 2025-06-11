@@ -12,6 +12,34 @@ const FINISH_TYPES = ['Матовая ламинация', 'Глянцевая �
 const HANDLE_TYPES = ['Лента репсовая', 'Веревочные', 'Бумажные', 'Вырубная ручка'];
 const HANDLE_ATTACHMENTS = ['Вклеенные', 'На люверсах'];
 
+const MAX_ATTEMPTS = 5;
+
+async function generateWithRetry(model, prompt) {
+  let attempt = 0;
+  let delay   = 1000; // 1 сек
+  while (attempt < MAX_ATTEMPTS) {
+    try {
+      const res = await model.generateContent(prompt);
+      return res.response.text();
+    } catch (err) {
+      const code = err.status || err.code || 0;
+      if (![429, 500, 503].includes(code)) {
+        console.error(`Non-retryable error: ${code}`, err);
+        throw err;       // нет смысла ретраить
+      }
+      attempt++;
+      if (attempt === MAX_ATTEMPTS) {
+        console.error(`Max retries reached for error: ${code}`, err);
+        throw err;              // исчерпали попытки
+      }
+      console.warn(`Retrying after error ${code}, attempt ${attempt}. Delay: ${delay}ms`, err);
+      await new Promise(r => setTimeout(r, delay + Math.random()*250));
+      delay *= 2;                                           // backoff ×2
+    }
+  }
+  throw new Error("Failed to generate content after multiple retries."); // Добавим на случай, если цикл завершится без throw
+}
+
 // Функция для парсинга CSV-строки
 function parseCSV(csvString) {
   const lines = csvString.trim().split('\n');
@@ -130,9 +158,7 @@ ${DIALOG_EXAMPLE}
 *   **Доп. информация:** [Например, Логотип - обычная печать]
 `;
 
-    const result = await model.generateContent(combinedPrompt + "\n\nЗапрос клиента: " + message);
-    const response = await result.response;
-    const text = response.text();
+    const text = await generateWithRetry(model, combinedPrompt + "\n\nЗапрос клиента: " + message);
     
     return c.json({ response: text });
   } catch (error) {
