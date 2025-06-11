@@ -73,7 +73,7 @@ function App() {
             {/* Заменяем img на inline SVG */}
             <CalculatorIcon className="mb-6 w-28 h-28 opacity-40 text-[#6EE7B7]" />
             <p className="text-2xl font-semibold mb-4">Начните описание вашего заказа упаковки</p>
-            <p className="text-lg max-w-md">Например: &quot;Нужны коробки самосборные 200x150x100мм, мелованная бумага 350г/м², 1000 штук, печать 4+0&quot;</p>
+            <p className="text-lg max-w-md">Например: &quot;Пакет, медная бумага. Плотность 250 грамм. Зеркальный, с вырубной ручкой,Размер 25х30х80мм, logo нанесение белое: лицевая 10х7,5см., оборотная - 14х0,5см. Количество 500&quot;</p>
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
