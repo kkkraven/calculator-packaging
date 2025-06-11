@@ -17,6 +17,8 @@ function App() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showLogs, setShowLogs] = useState(false);
+  const [logs, setLogs] = useState<Array<{ request: string, response: string, actualPrice?: string }>>([]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,15 +36,21 @@ function App() {
     try {
       const response = await sendMessage(userMessage);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setLogs(prev => [...prev, { request: userMessage, response: response }]);
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: 'Произошла ошибка при обработке запроса. Пожалуйста, попробуйте еще раз.' 
       }]);
+      setLogs(prev => [...prev, { request: userMessage, response: 'Произошла ошибка.' }]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleClearLogs = () => {
+    setLogs([]);
   };
 
   return (
@@ -118,6 +126,17 @@ function App() {
             </svg>
           </button>
         </form>
+
+      {/* Кнопка История запросов */}
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={() => setShowLogs(true)}
+          className="px-6 py-3 bg-[#3F72AF] text-white rounded-full hover:bg-[#4A85C1] focus:outline-none focus:ring-2 focus:ring-[#6EE7B7] focus:ring-offset-2 focus:ring-offset-[#2A313C] transition-colors duration-200 shadow-md"
+        >
+          История запросов
+        </button>
+      </div>
+
       </div>
 
       {/* Футер */}
@@ -125,8 +144,13 @@ function App() {
         © 2025 Factura.Textile AI Studio . Все расчеты являются предварительными.
       </footer>
 
-      {/* Панель истории запросов (скрыта по умолчанию, так как ее нет на референсе) */}
-      {/* <div className={`fixed top-0 right-0 h-full w-80 bg-white/95 backdrop-blur-md shadow-2xl transform transition-transform duration-300 ease-in-out ${showLogs ? 'translate-x-0' : 'translate-x-full'} p-6 overflow-y-auto z-50 border-l border-gray-200`}>
+      {/* Панель истории запросов */}
+      <motion.div
+        initial={{ x: '100%' }}
+        animate={{ x: showLogs ? '0%' : '100%' }}
+        transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
+        className={`fixed top-0 right-0 h-full w-80 bg-white/95 backdrop-blur-md shadow-2xl p-6 overflow-y-auto z-50 border-l border-gray-200 text-gray-900`}
+      >
         <button onClick={() => setShowLogs(false)} className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-600">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -135,19 +159,23 @@ function App() {
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">История запросов</h2>
         <button onClick={handleClearLogs} className="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 mb-6 shadow-md">Очистить историю</button>
         <div className="space-y-4">
-          {logs.map((log, index) => (
-            <div key={index} className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200 text-sm break-words">
-              <p className="font-semibold text-gray-700 mb-1">Запрос:</p>
-              <p className="text-gray-800 mb-3">{log.request}</p>
-              <p className="font-semibold text-gray-700 mb-1">Ответ:</p>
-              <p className="text-gray-800 mb-3">{log.response}</p>
-              {log.actualPrice && (
-                <p className="font-semibold text-gray-700">Фактическая цена: <span className="font-normal text-gray-800">{log.actualPrice}</span></p>
-              )}
-            </div>
-          ))}
+          {logs.length === 0 ? (
+            <p className="text-gray-500">История пока пуста.</p>
+          ) : (
+            logs.map((log, index) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200 text-sm break-words">
+                <p className="font-semibold text-gray-700 mb-1">Запрос:</p>
+                <p className="text-gray-800 mb-3">{log.request}</p>
+                <p className="font-semibold text-gray-700 mb-1">Ответ:</p>
+                <p className="text-gray-800 mb-3">{log.response}</p>
+                {log.actualPrice && (
+                  <p className="font-semibold text-gray-700">Фактическая цена: <span className="font-normal text-gray-800">{log.actualPrice}</span></p>
+                )}
+              </div>
+            ))
+          )}
         </div>
-      </div> */}
+      </motion.div>
     </div>
   );
 }
