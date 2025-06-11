@@ -122,7 +122,7 @@ function App() {
 
       {/* Футер */}
       <footer className="text-center mt-8 text-gray-500 text-sm">
-        &copy; 2025 AI Packaging Estimator. Все расчеты являются предварительными.
+        © 2025 Factura.Textile AI Studio . Все расчеты являются предварительными.
       </footer>
 
       {/* Панель истории запросов (скрыта по умолчанию, так как ее нет на референсе) */}
